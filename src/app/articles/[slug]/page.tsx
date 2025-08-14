@@ -9,11 +9,12 @@ import { ChevronLeft } from "lucide-react";
 import { CommentsSection } from "@/components/comments-section";
 import { RelatedArticles } from "@/components/related-articles";
 import { Badge } from "@/components/ui/badge";
-// Menghapus: import { type PageProps } from "next"; // Baris ini menyebabkan kesalahan
+import { ShareButtons } from "@/components/share-buttons"; // Import ShareButtons
+import { Toaster } from "sonner"; // Import Toaster for toasts
 
 // Mendefinisikan tipe props secara langsung
 type ArticlePageProps = {
-  params: Readonly<{ slug: string }>;
+  params: Record<string, string>; // Perbaikan di sini: menggunakan Record<string, string>
   searchParams?: { [key: string]: string | string[] | undefined };
 };
 
@@ -24,14 +25,19 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound();
   }
 
+  // Construct full URL for sharing
+  const articleUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/articles/${article.slug}`;
+
   return (
     <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 max-w-3xl">
-      <div className="mb-8">
+      <Toaster /> {/* Add Toaster component here */}
+      <div className="mb-8 flex justify-between items-center">
         <Link href="/articles">
           <Button variant="outline" className="flex items-center gap-2">
             <ChevronLeft className="h-4 w-4" /> Kembali ke Artikel
           </Button>
         </Link>
+        <ShareButtons title={article.title} url={articleUrl} text={article.description} />
       </div>
 
       {article.thumbnail && (
