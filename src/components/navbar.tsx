@@ -4,11 +4,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
+// import { useIsMobile } from "@/hooks/use-mobile"; // Tidak lagi diperlukan di sini
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
-  const isMobile = useIsMobile();
+  // const isMobile = useIsMobile(); // Baris ini dihapus
 
   const navLinks = [
     { name: "Beranda", href: "/" },
@@ -20,6 +20,7 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center px-4 sm:px-6 lg:px-8">
+        {/* Navigasi Desktop - tersembunyi di layar kecil */}
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <span className="font-bold">FQLabs</span>
@@ -36,38 +37,40 @@ export function Navbar() {
             ))}
           </nav>
         </div>
-        {isMobile && (
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
-              >
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle Menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="pr-0">
-              <Link href="/" className="flex items-center space-x-2">
-                <span className="font-bold">FQLabs</span>
-              </Link>
-              <nav className="grid gap-2 text-lg mt-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className="flex w-full items-center py-2 text-lg font-semibold"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
-        )}
+
+        {/* Navigasi Seluler - terlihat hanya di layar kecil */}
+        {/* Kondisi isMobile dihapus, mengandalkan kelas md:hidden pada tombol */}
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+            >
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle Menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="pr-0">
+            <Link href="/" className="flex items-center space-x-2">
+              <span className="font-bold">FQLabs</span>
+            </Link>
+            <nav className="grid gap-2 text-lg mt-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="flex w-full items-center py-2 text-lg font-semibold"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
+          </SheetContent>
+        </Sheet>
+
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          {/* You can add other elements here, like a theme toggle or user profile */}
+          {/* Anda bisa menambahkan elemen lain di sini, seperti tema toggle atau profil pengguna */}
         </div>
       </div>
     </header>
