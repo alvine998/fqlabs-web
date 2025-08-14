@@ -13,10 +13,11 @@ import { ShareButtons } from "@/components/share-buttons"; // Import ShareButton
 import { Toaster } from "sonner"; // Import Toaster for toasts
 
 // Mendefinisikan tipe props secara langsung
-type ArticlePageProps = {
-  params: { slug: string }; // Mengubah dari Readonly<{ slug: string }>
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
+interface ArticlePageProps {
+  params: { slug: string };
+  searchParams?: Record<string, string | string[] | undefined>;
+}
+
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const article = await getArticleBySlug(params.slug);
