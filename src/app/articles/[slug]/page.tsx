@@ -9,18 +9,19 @@ import { ChevronLeft } from "lucide-react";
 import { CommentsSection } from "@/components/comments-section";
 import { RelatedArticles } from "@/components/related-articles";
 import { Badge } from "@/components/ui/badge";
-import { ShareButtons } from "@/components/share-buttons"; // Import ShareButtons
-import { Toaster } from "sonner"; // Import Toaster for toasts
+import { ShareButtons } from "@/components/share-buttons";
+import { Toaster } from "sonner";
 
 // Mendefinisikan tipe props secara langsung
-interface ArticlePageProps {
-  params: { slug: string };
-  searchParams?: Record<string, string | string[] | undefined>;
-}
-
+type ArticlePageProps = {
+  params: { slug: string | string[] }; // Mengubah tipe slug menjadi string | string[]
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
-  const article = await getArticleBySlug(params.slug);
+  // Pastikan slug adalah string, terutama jika rute adalah catch-all
+  const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
+  const article = getArticleBySlug(slug);
 
   if (!article) {
     notFound();
@@ -31,7 +32,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   return (
     <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 max-w-3xl">
-      <Toaster /> {/* Add Toaster component here */}
+      <Toaster />
       <div className="mb-8 flex justify-between items-center">
         <Link href="/articles">
           <Button variant="outline" className="flex items-center gap-2">
