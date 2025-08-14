@@ -19,7 +19,7 @@ type ArticlePageProps = {
 };
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
-  const article = getArticleBySlug(params.slug);
+  const article = await getArticleBySlug(params.slug);
 
   if (!article) {
     notFound();
