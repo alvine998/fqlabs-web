@@ -4,6 +4,7 @@ export type Article = {
   description: string;
   date: string;
   content: string;
+  thumbnail: string; // Added thumbnail property
 };
 
 const articles: Article[] = [
@@ -25,6 +26,7 @@ const articles: Article[] = [
       <p class="mb-4">Investasi dalam pengembangan website adalah investasi jangka panjang untuk pertumbuhan dan keberlanjutan bisnis Anda. Pastikan website Anda responsif, cepat, dan mudah dinavigasi untuk memberikan pengalaman terbaik bagi pengunjung.</p>
       <p>FQLabs siap membantu Anda membangun website profesional yang sesuai dengan kebutuhan bisnis Anda.</p>
     `,
+    thumbnail: "https://via.placeholder.com/400x200/FF5733/FFFFFF?text=Website+Modern", // Dummy thumbnail
   },
   {
     slug: "strategi-seo-dasar-untuk-pemula",
@@ -45,6 +47,7 @@ const articles: Article[] = [
       <p class="mb-4">Menerapkan strategi SEO membutuhkan waktu dan kesabaran, tetapi hasilnya akan sangat berharga dalam jangka panjang untuk menarik lalu lintas organik ke website Anda.</p>
       <p>FQLabs dapat membantu Anda dalam strategi SEO untuk meningkatkan peringkat website Anda.</p>
     `,
+    thumbnail: "https://via.placeholder.com/400x200/33FF57/FFFFFF?text=SEO+Dasar", // Dummy thumbnail
   },
   {
     slug: "memilih-platform-ecommerce-yang-tepat",
@@ -65,6 +68,7 @@ const articles: Article[] = [
       <p class="mb-4">Beberapa platform populer termasuk Shopify, WooCommerce (untuk WordPress), Magento, dan BigCommerce. Setiap platform memiliki kelebihan dan kekurangannya sendiri. Lakukan riset mendalam dan pertimbangkan kebutuhan spesifik bisnis Anda sebelum membuat keputusan.</p>
       <p>FQLabs dapat memberikan konsultasi untuk membantu Anda memilih dan membangun toko online yang optimal.</p>
     `,
+    thumbnail: "https://via.placeholder.com/400x200/3357FF/FFFFFF?text=E-commerce+Platform", // Dummy thumbnail
   },
 ];
 
