@@ -1,23 +1,26 @@
 import { getArticleBySlug } from "@/lib/articles";
 import { notFound } from "next/navigation";
 import { format } from "date-fns";
-import { id } from "date-fns/locale"; // Import locale for Indonesian date formatting
+import { id } from "date-fns/locale";
 import Link from "next/link";
-import Image from "next/image"; // Import Image component
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
-import { CommentsSection } from "@/components/comments-section"; // Import CommentsSection
-import { RelatedArticles } from "@/components/related-articles"; // Import RelatedArticles
-import { type PageProps } from "next"; // Import PageProps from next
+import { CommentsSection } from "@/components/comments-section";
+import { RelatedArticles } from "@/components/related-articles";
+import { Badge } from "@/components/ui/badge";
 
-// Menggunakan PageProps dari Next.js untuk memastikan kompatibilitas tipe yang benar
-type ArticlePageProps = PageProps<{ slug: string }>;
+// Mendefinisikan tipe props secara langsung dengan tipe params yang lebih eksplisit
+type ArticlePageProps = {
+  params: Readonly<{ slug: string }>; // Menggunakan Readonly untuk params
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
 export default function ArticlePage({ params }: ArticlePageProps) {
   const article = getArticleBySlug(params.slug);
 
   if (!article) {
-    notFound(); // Render Next.js 404 page if article not found
+    notFound();
   }
 
   return (
@@ -37,7 +40,7 @@ export default function ArticlePage({ params }: ArticlePageProps) {
             alt={article.title}
             fill
             className="object-cover"
-            priority // Prioritize loading for hero image
+            priority
             sizes="(max-width: 768px) 100vw, 700px"
           />
         </div>
@@ -46,10 +49,18 @@ export default function ArticlePage({ params }: ArticlePageProps) {
       <h1 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 leading-tight">
         {article.title}
       </h1>
-      <p className="text-lg text-muted-foreground mb-8">
+      <p className="text-lg text-muted-foreground mb-4">
         Dipublikasikan pada{" "}
         {format(new Date(article.date), "dd MMMM yyyy, HH:mm 'WIB'", { locale: id })}
       </p>
+
+      {article.tags && article.tags.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-8">
+          {article.tags.map((tag, index) => (
+            <Badge key={index} variant="secondary">{tag}</Badge>
+          ))}
+        </div>
+      )}
 
       <div
         className="prose prose-lg dark:prose-invert max-w-none text-muted-foreground"

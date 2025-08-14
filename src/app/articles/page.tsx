@@ -2,8 +2,9 @@ import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getAllArticles } from "@/lib/articles";
 import { format } from "date-fns";
-import { id } from "date-fns/locale"; // Import locale for Indonesian date formatting
-import Image from "next/image"; // Import Image component
+import { id } from "date-fns/locale";
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge"; // Import Badge component
 
 export default function ArticlesPage() {
   const articles = getAllArticles();
@@ -41,7 +42,14 @@ export default function ArticlesPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex-grow">
-                <p className="text-muted-foreground">{article.description}</p>
+                <p className="text-muted-foreground mb-4">{article.description}</p>
+                {article.tags && article.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {article.tags.map((tag, tagIndex) => (
+                      <Badge key={tagIndex} variant="secondary">{tag}</Badge>
+                    ))}
+                  </div>
+                )}
               </CardContent>
             </Card>
           </Link>
