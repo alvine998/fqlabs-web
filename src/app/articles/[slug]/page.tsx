@@ -1,18 +1,21 @@
 import { getArticleBySlug } from "@/lib/articles";
 import { notFound } from "next/navigation";
 import { format } from "date-fns";
-import { id } from "date-fns/locale"; // Import locale for Indonesian date formatting
+import { id } from "date-fns/locale";
 import Link from "next/link";
-import Image from "next/image"; // Import Image component
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
-import { CommentsSection } from "@/components/comments-section"; // Import CommentsSection
-import { RelatedArticles } from "@/components/related-articles"; // Import RelatedArticles
+import { CommentsSection } from "@/components/comments-section";
+import { RelatedArticles } from "@/components/related-articles";
 import { Badge } from "@/components/ui/badge";
-import { type PageProps } from "next"; // Import PageProps from next
+// Menghapus: import { type PageProps } from "next"; // Baris ini menyebabkan kesalahan
 
-// Menggunakan PageProps dari Next.js untuk memastikan kompatibilitas tipe yang benar
-type ArticlePageProps = PageProps<{ slug: string }>;
+// Mendefinisikan tipe props secara langsung
+type ArticlePageProps = {
+  params: Readonly<{ slug: string }>;
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const article = getArticleBySlug(params.slug);
