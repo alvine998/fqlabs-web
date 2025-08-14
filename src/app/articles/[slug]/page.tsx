@@ -14,7 +14,7 @@ import { Toaster } from "sonner"; // Import Toaster for toasts
 
 // Mendefinisikan tipe props secara langsung
 type ArticlePageProps = {
-  params: Readonly<{ slug: string }>; // Mengembalikan ke Readonly<{ slug: string }>
+  params: { slug: string }; // Mengubah dari Readonly<{ slug: string }>
   searchParams?: { [key: string]: string | string[] | undefined };
 };
 
