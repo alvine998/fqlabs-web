@@ -33,14 +33,14 @@ const companyInfo = {
   ],
   team: [
     {
-      name: "Budi Santoso",
+      name: "Alvine Yoga Pratama",
       role: "CEO & Founder",
       bio: "Berpengalaman lebih dari 10 tahun di industri teknologi, Budi memimpin FQLabs dengan visi untuk inovasi digital.",
       avatarFallback: "BS",
       image: undefined, // Ditambahkan untuk memperbaiki kesalahan TypeScript
     },
     {
-      name: "Siti Aminah",
+      name: "Fadhil Alaidrus",
       role: "Lead Developer",
       bio: "Dengan keahlian mendalam dalam pengembangan web full-stack, Siti memastikan setiap proyek dibangun dengan standar tertinggi.",
       avatarFallback: "SA",
