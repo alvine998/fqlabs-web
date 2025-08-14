@@ -4,12 +4,10 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-// import { useIsMobile } from "@/hooks/use-mobile"; // Tidak lagi diperlukan di sini
 import { cn } from "@/lib/utils";
+import { SearchDialog } from "@/components/search-dialog"; // Import SearchDialog
 
 export function Navbar() {
-  // const isMobile = useIsMobile(); // Baris ini dihapus
-
   const navLinks = [
     { name: "Beranda", href: "/" },
     { name: "Tentang Kami", href: "/about" },
@@ -39,7 +37,6 @@ export function Navbar() {
         </div>
 
         {/* Navigasi Seluler - terlihat hanya di layar kecil */}
-        {/* Kondisi isMobile dihapus, mengandalkan kelas md:hidden pada tombol */}
         <Sheet>
           <SheetTrigger asChild>
             <Button
@@ -70,6 +67,7 @@ export function Navbar() {
         </Sheet>
 
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+          <SearchDialog /> {/* Add SearchDialog here */}
           {/* Anda bisa menambahkan elemen lain di sini, seperti tema toggle atau profil pengguna */}
         </div>
       </div>
